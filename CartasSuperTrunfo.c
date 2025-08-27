@@ -1,22 +1,76 @@
 #include <stdio.h>
-
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
+#include <stdlib.h>
+#include "carta/carta.h"
 
 int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
-    
-    // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
-    
-    // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
 
+    Carta* carta1;
+    Carta* carta2;
+
+    char codigo[4];
+    unsigned long int populacao;
+    float area;
+    float pib;
+    int pontosTuristicos;
+
+    printf("========\n");
+
+    printf("Digite o codigo da carta (ex.: A01): ");
+    scanf("%3s", &codigo);
+
+    printf("Digite a populacao: ");
+    scanf("%1u", &populacao);
+
+    printf("Digite a area (em km2): ");
+    scanf("%f", &area);
+
+    printf("Digite o PIB: ");
+    scanf("%f", &pib);
+
+    printf("Digite o numero de pontos turisticos: ");
+    scanf("%d", &pontosTuristicos);
+
+    carta1 = cadastroCarta(codigo, populacao, area, pib, pontosTuristicos);
+
+    printf("========\n");
+
+    printf("========\n");
+
+    printf("Digite o codigo da carta (ex.: A01): ");
+    scanf("%3s", &codigo);
+
+    printf("Digite a populacao: ");
+    scanf("%1u", &populacao);
+
+    printf("Digite a area (em km2): ");
+    scanf("%f", &area);
+
+    printf("Digite o PIB: ");
+    scanf("%f", &pib);
+
+    printf("Digite o numero de pontos turisticos: ");
+    scanf("%d", &pontosTuristicos);
+
+    carta2 = cadastroCarta(codigo, populacao, area, pib, pontosTuristicos);
+
+    printf("========\n");
+
+    carta1->densidade = calculoDensidade(carta1->populacao, carta1->area);
+    carta1->pibPerCapita = calculoPibPerCapita(carta1->pib, carta1->populacao);
+    carta1->superPoder = calculoSuperPoder(carta1);
+
+    carta2->densidade = calculoDensidade(carta2->populacao, carta2->area);
+    carta2->pibPerCapita = calculoPibPerCapita(carta2->pib, carta2->populacao);
+    carta2->superPoder = calculoSuperPoder(carta2);
+
+    exibirCarta(carta1);
+    exibirCarta(carta2);
+
+    exibirVencedor(carta1, carta2);
+
+    free(carta1);
+    free(carta2);
+
+    system("pause");
     return 0;
 }
